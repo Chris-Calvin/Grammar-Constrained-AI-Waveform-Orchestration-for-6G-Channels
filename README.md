@@ -32,7 +32,7 @@ This paper presents the **Grammar-Constrained Transformer-Based Cognitive Wavefo
 | CNN-WS [12] | ❌ 28.3% violations | ❌ 77.8% | ❌ GPU only |
 | LSTM-WS [13] | ❌ 41.5% violations | ❌ 74.2% | ❌ GPU only |
 | GNN-WS [14] | ❌ 22.6% violations | ❌ 80.6% | ❌ GPU only |
-| **CWO (this work)** | **✅ 0.00% ** | **✅ 95.35%** | **✅ 3.88 ms** |
+| **CWO (this work)** | **✅ 0.00%** | **✅ 95.35%** | **✅ 3.88 ms** |
 
 Rule engines fail at boundary states because they assign equal validity to all constraint-satisfying configurations and fall back to fixed tie-breaking heuristics. Neural networks handle boundaries better but generate invalid 3GPP configurations in over 82% of cases. CWO addresses all three requirements simultaneously.
 
