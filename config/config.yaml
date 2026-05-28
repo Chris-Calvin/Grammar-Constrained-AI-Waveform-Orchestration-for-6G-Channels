@@ -1,0 +1,142 @@
+# ============================================================================
+# Grammar-Constrained Transformer-Based Cognitive Waveform Orchestration System
+# Configuration File
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Random Seed
+# ---------------------------------------------------------------------------
+random_seed: 42
+
+# ---------------------------------------------------------------------------
+# Vocabulary Sizes per Waveform Parameter
+# ---------------------------------------------------------------------------
+vocab_sizes:
+  waveform_type: 6        # Number of waveform candidates
+  modulation_order: 5     # e.g. BPSK, QPSK, 16QAM, 64QAM, 256QAM
+  subcarrier_spacing: 4   # e.g. 15kHz, 30kHz, 60kHz, 120kHz
+  num_subcarriers: 6      # e.g. 64, 128, 256, 512, 1024, 2048
+  cp_length: 4            # e.g. normal, extended, zero, custom
+  power_level: 8          # quantized power levels
+  coding_rate: 4          # e.g. 1/2, 2/3, 3/4, 5/6
+  mimo_config: 4          # e.g. SISO, 2x2, 4x4, 8x8
+  bandwidth: 5            # e.g. 50MHz, 100MHz, 200MHz, 400MHz, 800MHz
+  beamforming: 3          # e.g. none, analog, digital
+
+# ---------------------------------------------------------------------------
+# Transformer Architecture Parameters
+# ---------------------------------------------------------------------------
+transformer:
+  n_layers: 2
+  n_heads: 4
+  embed_dim: 64
+  ff_dim: 128
+  dropout: 0.1
+  max_seq_len: 10         # Number of waveform parameters in a configuration
+  activation: "gelu"
+
+# ---------------------------------------------------------------------------
+# Training Parameters
+# ---------------------------------------------------------------------------
+training:
+  learning_rate: 1.0e-3
+  batch_size: 256
+  epochs: 50
+  patience: 5
+  weight_decay: 1.0e-5
+  scheduler: "cosine"
+  warmup_steps: 100
+  gradient_clip: 1.0
+
+# ---------------------------------------------------------------------------
+# Dataset Parameters
+# ---------------------------------------------------------------------------
+dataset:
+  total_samples: 50000
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+  boundary_samples: 2000
+  num_workers: 4
+  pin_memory: true
+
+# ---------------------------------------------------------------------------
+# Waveform Candidates
+# ---------------------------------------------------------------------------
+waveform_candidates:
+  - OFDM
+  - F_OFDM
+  - FBMC
+  - SC_FDMA
+  - OTFS
+  - NOMA
+
+# ---------------------------------------------------------------------------
+# Frequency Bands
+# ---------------------------------------------------------------------------
+frequency_bands:
+  - name: "sub6_low"
+    range_ghz: [0.45, 1.0]
+    description: "Sub-6 GHz low band"
+  - name: "sub6_mid"
+    range_ghz: [1.0, 3.0]
+    description: "Sub-6 GHz mid band"
+  - name: "sub6_high"
+    range_ghz: [3.0, 6.0]
+    description: "Sub-6 GHz high band (C-band)"
+  - name: "mmwave_low"
+    range_ghz: [24.0, 40.0]
+    description: "mmWave low band"
+  - name: "mmwave_high"
+    range_ghz: [40.0, 100.0]
+    description: "mmWave high band"
+  - name: "thz_window1"
+    range_ghz: [125.0, 175.0]
+    description: "THz transmission window 1"
+  - name: "thz_window2"
+    range_ghz: [200.0, 300.0]
+    description: "THz transmission window 2"
+  - name: "thz_window3"
+    range_ghz: [350.0, 450.0]
+    description: "THz transmission window 3"
+
+# ---------------------------------------------------------------------------
+# CDL Channel Model Parameters
+# ---------------------------------------------------------------------------
+cdl_model:
+  models:
+    - CDL-A
+    - CDL-B
+    - CDL-C
+    - CDL-D
+    - CDL-E
+  delay_spread_ns: [30, 100, 300, 1000]
+  k_factor_db: [0, 3, 6, 9]
+  max_doppler_hz: [10, 50, 100, 500, 1000]
+  num_paths: 23
+  antenna_config:
+    tx_antennas: [1, 2, 4, 8]
+    rx_antennas: [1, 2, 4, 8]
+
+# ---------------------------------------------------------------------------
+# THz-Specific Window Definitions
+# ---------------------------------------------------------------------------
+thz_windows:
+  window1:
+    center_ghz: 150.0
+    bandwidth_ghz: 50.0
+    range_ghz: [125.0, 175.0]
+    atmospheric_loss_db_per_km: 10.0
+    max_range_m: 50.0
+  window2:
+    center_ghz: 250.0
+    bandwidth_ghz: 100.0
+    range_ghz: [200.0, 300.0]
+    atmospheric_loss_db_per_km: 20.0
+    max_range_m: 30.0
+  window3:
+    center_ghz: 400.0
+    bandwidth_ghz: 100.0
+    range_ghz: [350.0, 450.0]
+    atmospheric_loss_db_per_km: 50.0
+    max_range_m: 10.0
