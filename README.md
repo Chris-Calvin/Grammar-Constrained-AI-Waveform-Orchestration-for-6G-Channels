@@ -3,7 +3,6 @@
 **Authors:** Chris Calvin P, Afra Parveen Jameel, Dr. P. Jothilakshmi  
 **Institution:** Amrita School of Engineering, Amrita Vishwa Vidyapeetham, Chennai, India  
  
-
 ---
 
 ## Abstract
@@ -195,24 +194,24 @@ Training: Adam, lr = 10⁻³, cosine decay, 10 epochs, CPU-only, seed = 42.
 
 ### 5.1 Training Convergence
 
-![Loss Curve](images/fig1a_loss_curve.png)  
+![Loss Curve](images/FIG1A_~1.PNG)  
 *Fig. 1(a) — Loss curves over 10 epochs. Train/val gap < 0.03 at all epochs, settling at 0.19/0.20 — no overfitting. Smooth convergence confirms the 12-token input and 56-symbol vocabulary are well-matched to model capacity at d = 64.*
 
-![Accuracy Curve](images/fig1b_accuracy_curve.png)  
+![Accuracy Curve](images/FIG1B_~1.PNG)  
 *Fig. 1(b) — Accuracy curves over 10 epochs. Validation ≥ training in epochs 1–5 due to encoder dropout regularisation; final val = 88.5%. The 0.7 pp train–val gap persists without explicit regularisation beyond dropout.*
 
 ### 5.2 Ablation 1 — CWO vs. Random Baseline
 
-![Accuracy Comparison](images/fig2a_accuracy_comparison.png)  
+![Accuracy Comparison](images/FIG2A_~1.PNG)  
 *Fig. 2(a) — Accuracy: CWO 87.04% vs. random 15.86% (+71.18 pp). Cohen's d = 1.09, p < 10⁻¹⁰⁰.*
 
-![Utility Distribution](images/fig2b_utility_distribution.png)  
+![Utility Distribution](images/FIG2B_~1.PNG)  
 *Fig. 2(b) — Utility score distribution. CWO concentrates mass near the maximum; random selection is diffuse across the range.*
 
-![Per-Waveform Selection](images/fig2c_per_waveform_selection.png)  
+![Per-Waveform Selection](images/FIG2C_~1.PNG)  
 *Fig. 2(c) — Per-waveform selection frequency (CWO vs. uniform random). OTFS and SC-FDMA — the two waveforms with the most restrictive validity conditions — benefit most from the constrained policy.*
 
-![Cumulative Utility](images/fig2d_cumulative_utility.png)  
+![Cumulative Utility](images/FIG2D_~1.PNG)  
 *Fig. 2(d) — Cumulative utility vs. sample index. CWO achieves a 2.6× advantage over random at n = 1,000 samples.*
 
 **Key observations:**
@@ -222,16 +221,16 @@ Training: Adam, lr = 10⁻³, cosine decay, 10 epochs, CPU-only, seed = 42.
 
 ### 5.3 Ablation 2 — Boundary Generalisation
 
-![Boundary Accuracy](images/fig3a_boundary_accuracy.png)  
+![Boundary Accuracy](images/FIG3A_~1.PNG)  
 *Fig. 3(a) — Boundary accuracy: CWO 95.35% vs. Rule Engine 79.35% (+16 pp) vs. GNN-WS 80.6% (+14.75 pp), on 2,000 boundary test samples.*
 
-![Boundary Utility Distribution](images/fig3b_boundary_utility_distribution.png)  
+![Boundary Utility Distribution](images/FIG3B_~1.PNG)  
 *Fig. 3(b) — Boundary utility score distribution. CWO's upper tail is wider — it extracts more utility even at the hardest ambiguous states.*
 
-![Head-to-Head Outcomes](images/fig3c_head_to_head_outcomes.png)  
+![Head-to-Head Outcomes](images/FIG3C_~1.PNG)  
 *Fig. 3(c) — Head-to-head outcomes on 2,000 boundary samples. CWO resolves 17.9% of contested samples correctly vs. 5.5% for the rule engine.*
 
-![Context Sensitivity](images/fig3d_context_sensitivity.png)  
+![Context Sensitivity](images/FIG3D_~1.PNG)  
 *Fig. 3(d) — Context sensitivity score vs. sequence step. Score = 0.225 > 0.15 threshold — EWA feedback provides a statistically meaningful contribution specifically at boundary states.*
 
 **Key observations:**
@@ -242,31 +241,25 @@ Training: Adam, lr = 10⁻³, cosine decay, 10 epochs, CPU-only, seed = 42.
 
 ### 5.4 Ablation 3 — Grammar Constraint
 
-![Violation Rate](images/fig4a_violation_rate.png)  
+![Violation Rate](images/FIG4A_~1.PNG)  
 *Fig. 4(a) — Violation rate: DFA-masked CWO 0.00% vs. unconstrained softmax 82.22% (provable, not empirical).*
 
-![Per-Constraint Counts](images/fig4b_per_constraint_counts.png)  
+![Per-Constraint Counts](images/FIG4B_~1.PNG)  
 *Fig. 4(b) — Unconstrained violation breakdown by constraint. C1 + C2 together account for 68.4% of all violations — multi-parameter rules involving joint conditions across fc, µ, and CP type whose interaction is not linearisable in logit space.*
 
-![Valid Config Accuracy](images/fig4c_valid_config_accuracy.png)  
+![Valid Config Accuracy](images/FIG4C_~1.PNG)  
 *Fig. 4(c) — Valid-configuration accuracy on identical model weights: 44.1% (unconstrained) → 87.04% (DFA-masked), +42.9 pp at zero training cost.*
 
-![Confidence Sharpening](images/fig4d_confidence_sharpening.png)  
+![Confidence Sharpening](images/FIG4D_~1.PNG)  
 *Fig. 4(d) — Prediction confidence distribution. Constrained outputs sharpen to > 0.95; unconstrained outputs remain in the 0.4–0.7 range — enabling threshold-based abstention at deployment.*
 
 ### 5.5 Ablation 4 — EWA Feedback
 
-![EWA Utility Improvement](images/fig4e_ewa_utility_improvement.png)  
+![EWA Utility Improvement](images/FIG4E_~1.PNG)  
 *Fig. 4(e) — Net utility improvement: +21.54% over static inference across 50 synthetic channel-degradation sequences (Doppler spike injected at step 20). Wilcoxon signed-rank p < 0.001, 100% win rate.*
 
-![EWA Recovery Steps](images/fig4f_ewa_recovery_steps.png)  
+![EWA Recovery Steps](images/FIG4F_~1.PNG)  
 *Fig. 4(f) — Recovery speed: 5 steps vs. 20 steps (≈ 19.4 ms vs. 77.6 ms for a 5G NR sub-frame) — 4× faster recovery. System reaches within 5% of post-spike optimum within one NR slot.*
-
-![EWA Adaptation Frequency](images/fig4g_ewa_adaptation_frequency.png)  
-*Fig. 4(g) — Adaptation frequency across waveforms. The asymmetric stability lock (3× SP required to switch, NG/SN triggers immediate override) prevents oscillation while ensuring rapid response to genuine degradation.*
-
-![EWA Win Rate](images/fig4h_ewa_win_rate.png)  
-*Fig. 4(h) — 100% positive-outcome win rate across all 50 sequences, confirming EWA feedback consistently improves utility over frozen static inference.*
 
 **Grammar constraint (Ablation 3):**
 - C1 + C2 together account for 68.4% of all unconstrained violations — these are multi-parameter rules involving joint conditions across fc, µ, and CP type simultaneously; three token dimensions whose interaction is not linearisable in logit space, which is why softmax alone cannot approximate them
@@ -337,7 +330,7 @@ Sensor dropout gracefully degrades because mean pooling averages over all availa
 - **THz communications** — First ML waveform selector that explicitly handles molecular absorption windows and avoids forbidden frequencies by construction
 - **Edge cognitive radio** — CPU-only sub-4 ms inference enables deployment on resource-constrained edge nodes without GPU dependency
 - **3GPP Rel.19 AI/ML-RAN** — Potential integration with model transfer and inference reporting procedures for over-the-air deployment (future work)
-- **NGSO satellite user terminals** — Adaptive waveform selection for non-geostationary constellation ground links with variable channel conditions
+- **NGSO satellite user terminals** ... Ground links with variable channel conditions
 
 ---
 
@@ -355,26 +348,23 @@ Three directions identified in the conclusion:
 
 | File | Description |
 |------|-------------|
-| `images/fig1a_loss_curve.png` | Training loss — train/val gap < 0.03, settles at 0.19/0.20 |
-| `images/fig1b_accuracy_curve.png` | Training accuracy — val ≥ train epochs 1–5; final val 88.5% |
-| `images/fig2a_accuracy_comparison.png` | Ablation 1: CWO 87.04% vs. random 15.86% (+71.18 pp, Cohen's d = 1.09) |
-| `images/fig2b_utility_distribution.png` | Ablation 1: utility score distribution — CWO concentrates near maximum |
-| `images/fig2c_per_waveform_selection.png` | Ablation 1: per-waveform selection frequency — OTFS and SC-FDMA benefit most |
-| `images/fig2d_cumulative_utility.png` | Ablation 1: cumulative utility — 2.6× advantage at n = 1,000 |
-| `images/fig3a_boundary_accuracy.png` | Ablation 2: boundary accuracy — CWO 95.35% vs. rule engine 79.35% (+16 pp) |
-| `images/fig3b_boundary_utility_distribution.png` | Ablation 2: boundary utility distribution — CWO upper tail wider |
-| `images/fig3c_head_to_head_outcomes.png` | Ablation 2: head-to-head — CWO resolves 17.9% contested samples vs. 5.5% rule engine |
-| `images/fig3d_context_sensitivity.png` | Ablation 2: EWA context sensitivity score = 0.225 > 0.15 threshold |
-| `images/fig4a_violation_rate.png` | Ablation 3: 0.00% (DFA) vs. 82.22% (unconstrained) violation rate |
-| `images/fig4b_per_constraint_counts.png` | Ablation 3: per-constraint violation counts — C1 + C2 = 68.4% |
-| `images/fig4c_valid_config_accuracy.png` | Ablation 3: valid-config accuracy 44.1% → 87.04% on same weights (+42.9 pp) |
-| `images/fig4d_confidence_sharpening.png` | Ablation 3: confidence sharpens to > 0.95 (was 0.4–0.7 unconstrained) |
-| `images/fig4e_ewa_utility_improvement.png` | Ablation 4: +21.54% utility improvement, 100% win rate, p < 0.001 |
-| `images/fig4f_ewa_recovery_steps.png` | Ablation 4: recovery in 5 vs. 20 steps — 4× faster (19.4 ms vs. 77.6 ms) |
-| `images/fig4g_ewa_adaptation_frequency.png` | Ablation 4: waveform adaptation frequency with stability lock behaviour |
-| `images/fig4h_ewa_win_rate.png` | Ablation 4: 100% positive-outcome win rate across 50 sequences |
+| `images/FIG1A_~1.PNG` | Training loss — train/val gap < 0.03, settles at 0.19/0.20 |
+| `images/FIG1B_~1.PNG` | Training accuracy — val ≥ train epochs 1–5; final val 88.5% |
+| `images/FIG2A_~1.PNG` | Ablation 1: CWO 87.04% vs. random 15.86% (+71.18 pp, Cohen's d = 1.09) |
+| `images/FIG2B_~1.PNG` | Ablation 1: utility score distribution — CWO concentrates near maximum |
+| `images/FIG2C_~1.PNG` | Ablation 1: per-waveform selection frequency — OTFS and SC-FDMA benefit most |
+| `images/FIG2D_~1.PNG` | Ablation 1: cumulative utility — 2.6× advantage at n = 1,000 |
+| `images/FIG3A_~1.PNG` | Ablation 2: boundary accuracy — CWO 95.35% vs. rule engine 79.35% (+16 pp) |
+| `images/FIG3B_~1.PNG` | Ablation 2: boundary utility distribution — CWO upper tail wider |
+| `images/FIG3C_~1.PNG` | Ablation 2: head-to-head — CWO resolves 17.9% contested samples vs. 5.5% rule engine |
+| `images/FIG3D_~1.PNG` | Ablation 2: EWA context sensitivity score = 0.225 > 0.15 threshold |
+| `images/FIG4A_~1.PNG` | Ablation 3: 0.00% (DFA) vs. 82.22% (unconstrained) violation rate |
+| `images/FIG4B_~1.PNG` | Ablation 3: per-constraint violation counts — C1 + C2 = 68.4% |
+| `images/FIG4C_~1.PNG` | Ablation 3: valid-config accuracy 44.1% → 87.04% on same weights (+42.9 pp) |
+| `images/FIG4D_~1.PNG` | Ablation 3: confidence sharpens to > 0.95 (was 0.4–0.7 unconstrained) |
+| `images/FIG4E_~1.PNG` | Ablation 4: +21.54% utility improvement, 100% win rate, p < 0.001 |
+| `images/FIG4F_~1.PNG` | Ablation 4: recovery in 5 vs. 20 steps — 4× faster (19.4 ms vs. 77.6 ms) |
 
 ---
 
-*Chris Calvin P — ch.en.u4ece23011@ch.students.amrita.edu*  
-*Amrita Vishwa Vidyapeetham, Chennai | B.Tech ECE 2023–2027*
+*Chris Calvin P — ch.en.u4ece23011@ch.students.amrita.edu* *Amrita Vishwa Vidyapeetham, Chennai | B.Tech ECE 2023–2027*
